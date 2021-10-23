@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InteractableItemsSpawner : MonoBehaviour
 {
+    public static InteractableItemsSpawner Instance;
+
     [SerializeField] private GameObject chickensPrefab;
     [SerializeField] private List<GameObject> traps;
     [SerializeField] private GameObject portalPrefab;
@@ -32,8 +34,11 @@ public class InteractableItemsSpawner : MonoBehaviour
     private bool portalWasSpawned = false;
     private bool nothingWasSpawned = false;
 
+    public int portalsCount = 0;
+
     private void Awake()
     {
+        Instance = this;
         spawnPointsSettings = GetComponent<InteractableItemsSettings>();
         spawnPointsCount = Random.Range(minSpawnPointsCount, maxSpawnPointsCount + 1);
         SpawnInteractablePoints();
@@ -49,6 +54,7 @@ public class InteractableItemsSpawner : MonoBehaviour
             if (i % 2 == 0 && !CheckOnPortalSkip())
             {
                 SpawnMultiplyPortal();
+                portalsCount++;
             }
             else
             {

@@ -30,6 +30,8 @@ public class PortalPiece : MonoBehaviour
 
     private void SetPortalPieceType()
     {
+        if (InteractableItemsSpawner.Instance.portalsCount == 0)
+            return;
         var num = Random.Range(0, multiplicationChanse + 1);
         if (num == 0)
             isMultiplication = true;
